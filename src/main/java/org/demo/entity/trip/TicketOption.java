@@ -1,9 +1,11 @@
 package org.demo.entity.trip;
 
 
+import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 
-public class TicketRange {
+@Embeddable
+public class TicketOption {
 
     protected int from;
 

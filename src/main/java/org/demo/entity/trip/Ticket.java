@@ -2,6 +2,8 @@ package org.demo.entity.trip;
 
 import org.demo.annotations.AggregateRoot;
 
+import javax.persistence.ElementCollection;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +14,17 @@ public class Ticket {
 
     protected String name;
 
-    protected Set<TicketRange> rangeSet = new HashSet<TicketRange>();
+    @ElementCollection
+    protected Set<TicketOption> options = new HashSet<TicketOption>();
+
+    public BigDecimal getPriceForCount(int count) {
+        for (TicketOption option : options) {
+            if (option.contains(count)) {
+                
+            }
+        }
+
+    }
 
     public int getId() {
         return id;
@@ -30,12 +42,12 @@ public class Ticket {
         this.name = name;
     }
 
-    public Set<TicketRange> getRangeSet() {
-        return rangeSet;
+    public Set<TicketOption> getOptions() {
+        return options;
     }
 
-    public void setRangeSet(Set<TicketRange> rangeSet) {
-        this.rangeSet = rangeSet;
+    public void setOptions(Set<TicketOption> options) {
+        this.options = options;
     }
 
     @Override
@@ -54,14 +66,4 @@ public class Ticket {
         return name != null ? name.hashCode() : 0;
     }
 
-
-    public Set<TicketConcreteEdition> generateConreteTickets() {
-        Set<TicketConcreteEdition> ticketConcreteEditions = new HashSet<TicketConcreteEdition>();
-
-        for (TicketRange ticketRange : rangeSet) {
-            ticketConcreteEditions.add(new TicketConcreteEdition(name, ticketRange.from, ticketRange.to, ticketRange.price));
-        }
-
-        return ticketConcreteEditions;
-    }
 }

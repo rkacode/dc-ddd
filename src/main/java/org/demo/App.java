@@ -1,7 +1,6 @@
 package org.demo;
 
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import org.demo.entity.roles.Agent;
 import org.demo.entity.trip.*;
@@ -25,26 +24,35 @@ public class App
         Set<Ticket> tickets = createTickets();
         tripTemplate.getTickets().addAll(tickets);
 
-        TripEdition tripEdition = tripTemplate.createNewTripEdition();
+        TripEdition tripEdition = new TripEdition();
 
         TripOption option1 = new TripOption();
         option1.setDateFrom("01.11.2015");
-        option1.setDateTo("31.12.2015");
+        option1.setDateTo("12.11.2015");
         option1.setHour("9:00");
         option1.setLanguage("Polish");
         option1.setMaxSeats(30);
-        option1.setWeekdDay("Monday");
+        option1.setWeekDay("Monday");
 
         TripOption option2 = new TripOption();
         option2.setDateFrom("01.11.2015");
-        option2.setDateTo("31.12.2015");
+        option2.setDateTo("09.11.2015");
         option2.setHour("9:00");
         option2.setLanguage("English");
         option2.setMaxSeats(15);
-        option2.setWeekdDay("Monday");
+        option2.setWeekDay("Monday");
+
+        TripOption option3 = new TripOption();
+        option3.setDateFrom("01.11.2015");
+        option3.setDateTo("09.11.2015");
+        option3.setHour("9:00");
+        option3.setLanguage("English");
+        option3.setMaxSeats(15);
+        option3.setWeekDay("Monday");
 
         tripEdition.getTripOptions().add(option1);
         tripEdition.getTripOptions().add(option2);
+        tripEdition.getTripOptions().add(option3);
 
         Agent goldenLion = new Agent();
         goldenLion.setName("Golden Lion");
@@ -54,7 +62,7 @@ public class App
 
         tripEdition.getOverrides().put(goldenLion, createTicketsForGoldenLion());
 
-        
+
     }
 
     private Set<Ticket> createTickets() {
@@ -62,29 +70,29 @@ public class App
         adultTicket.setId(1);
         adultTicket.setName("Adult");
 
-        TicketRange adult1To3 = new TicketRange();
+        TicketOption adult1To3 = new TicketOption();
         adult1To3.setFrom(1);
         adult1To3.setTo(3);
         adult1To3.setPrice(BigDecimal.valueOf(15.00));
 
 
-        TicketRange adult4to7 = new TicketRange();
+        TicketOption adult4to7 = new TicketOption();
         adult4to7.setFrom(4);
         adult4to7.setTo(7);
         adult4to7.setPrice(BigDecimal.valueOf(12.00));
 
+        adultTicket.getOptions().add(adult1To3);
+        adultTicket.getOptions().add(adult4to7);
 
-        adultTicket.getRangeSet().add(adult1To3);
-        adultTicket.getRangeSet().add(adult4to7);
 
         Ticket studentTicket = new Ticket();
         studentTicket.setId(2);
         studentTicket.setName("Student");
 
-        TicketRange student1 = new TicketRange();
+        TicketOption student1 = new TicketOption();
         student1.setFrom(1);
         student1.setPrice(BigDecimal.valueOf(9.00));
-        studentTicket.getRangeSet().add(student1);
+        studentTicket.getOptions().add(student1);
 
         return ImmutableSet.of(adultTicket, studentTicket);
     }
@@ -94,10 +102,10 @@ public class App
         studentTicket.setId(2);
         studentTicket.setName("Student");
 
-        TicketRange student1 = new TicketRange();
+        TicketOption student1 = new TicketOption();
         student1.setFrom(1);
         student1.setPrice(BigDecimal.valueOf(5.00));
-        studentTicket.getRangeSet().add(student1);
+        studentTicket.getOptions().add(student1);
 
         return ImmutableSet.of(studentTicket);
     }

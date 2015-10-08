@@ -74,7 +74,5 @@ public class TripTemplate {
         this.tripEditions = tripEditions;
     }
 
-    public TripEdition createNewTripEdition() {
-        return null;
-    }
+
 }

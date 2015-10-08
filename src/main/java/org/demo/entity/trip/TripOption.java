@@ -1,7 +1,5 @@
 package org.demo.entity.trip;
 
-import java.util.Set;
-
 public class TripOption {
 
     private String language;
@@ -12,7 +10,7 @@ public class TripOption {
 
     private String dateTo;
 
-    private String weekdDay;
+    private String weekDay;
 
     private int maxSeats;
 
@@ -48,12 +46,12 @@ public class TripOption {
         this.dateTo = dateTo;
     }
 
-    public String getWeekdDay() {
-        return weekdDay;
+    public String getWeekDay() {
+        return weekDay;
     }
 
-    public void setWeekdDay(String weekdDay) {
-        this.weekdDay = weekdDay;
+    public void setWeekDay(String weekDay) {
+        this.weekDay = weekDay;
     }
 
     public int getMaxSeats() {
