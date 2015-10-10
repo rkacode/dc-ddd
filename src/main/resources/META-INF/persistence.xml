@@ -14,4 +14,32 @@
         </properties>
 
     </persistence-unit>
+
+    <persistence-unit name="mysql" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>org.demo.entity.trip.Ticket</class>
+        <class>org.demo.entity.trip.TicketOption</class>
+        <class>org.demo.entity.trip.TicketOverride</class>
+        <class>org.demo.entity.trip.Trip</class>
+        <class>org.demo.entity.trip.TripEdition</class>
+        <class>org.demo.entity.trip.TripOption</class>
+        <class>org.demo.entity.trip.TripTemplate</class>
+        <class>org.demo.entity.roles.Agent</class>
+        <class>org.demo.entity.roles.User</class>
+        <class>org.demo.entity.roles.Manager</class>
+        <class>org.demo.entity.reservation.Reservation</class>
+
+        <class>org.demo.LocalDatePersistenceConverter</class>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/discovercracow" />
+            <property name="javax.persistence.jdbc.user" value="rafal"/>
+            <property name="javax.persistence.jdbc.password" value="rafal14"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
 </persistence>

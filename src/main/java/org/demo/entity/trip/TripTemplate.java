@@ -1,13 +1,11 @@
 package org.demo.entity.trip;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "trip_template")
 public class TripTemplate {
 
     @Id
@@ -20,11 +18,12 @@ public class TripTemplate {
 
     private String description;
 
-    @OneToMany
-    private Set<Ticket> tickets = new HashSet<Ticket>();
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "trip_template")
+    private Set<Ticket> tickets = new HashSet<>();
 
-    @OneToMany
-    private Set<TripEdition> tripEditions = new HashSet<TripEdition>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tripTemplate")
+    private Set<TripEdition> tripEditions = new HashSet<>();
 
     public int getId() {
         return id;

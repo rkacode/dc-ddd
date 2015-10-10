@@ -2,28 +2,41 @@ package org.demo.entity.trip;
 
 import org.demo.annotations.AggregateRoot;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
 @AggregateRoot
+@Entity
+@Table(name = "ticket")
 public class Ticket {
 
+    @Id
+    @GeneratedValue
     protected int id;
 
     protected String name;
 
     @ElementCollection
+    @CollectionTable(name = "ticket_options")
     protected Set<TicketOption> options = new HashSet<TicketOption>();
 
-    public BigDecimal getPriceForCount(int count) {
+    public Ticket(String name) {
+        this.name = name;
+    }
+
+    public Ticket() {
+    }
+
+    public BigDecimal calculatePrice(int count) {
         for (TicketOption option : options) {
             if (option.contains(count)) {
-                
+                return option.getPrice().multiply(BigDecimal.valueOf(count));
             }
         }
 
+        throw new RuntimeException("No price available for count: " + count);
     }
 
     public int getId() {
@@ -57,13 +70,16 @@ public class Ticket {
 
         Ticket ticket = (Ticket) o;
 
-        return !(name != null ? !name.equals(ticket.name) : ticket.name != null);
+        if (name != null ? !name.equals(ticket.name) : ticket.name != null) return false;
+        if (options != null ? !options.equals(ticket.options) : ticket.options != null) return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (options != null ? options.hashCode() : 0);
+        return result;
     }
-
 }

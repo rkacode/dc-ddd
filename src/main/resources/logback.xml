@@ -10,7 +10,9 @@
 
     <logger name="org.hibernate.SQL" level="DEBUG" />
 
-    <root level="INFO">
+    <logger name="org.demo.entity.trip" level="INFO" />
+
+    <root level="WARN">
         <appender-ref ref="STDOUT" />
     </root>
 
